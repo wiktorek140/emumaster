@@ -153,7 +153,7 @@ void TouchInputDevice::sync(EmuInput *emuInput)
 
 void TouchInputDevice::convertPad()
 {
-	int oldButtons = m_buttons;
+    //int oldButtons = m_buttons;
 	m_buttons = 0;
 
 	for (int i = 0; i < m_numPoints; i++) {

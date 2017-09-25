@@ -1,0 +1,11 @@
+--- src/emumaster.pro
++++ src/emumaster.pro
+@@ -2,7 +2,7 @@ TEMPLATE = subdirs
+ 
+ SUBDIRS += \
+     base \
+-	amiga snes gba \
++	nes pico amiga snes gba \
+ 	diskgallery 
+ 
+ # nes gba snes psx amiga pico \

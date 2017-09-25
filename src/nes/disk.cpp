@@ -17,8 +17,8 @@
 #include "disk.h"
 #include "mapper.h"
 #include <base/crc32.h>
-#include <QAbstractFileEngine>
-
+//#include <QAbstractFileEngine>
+#include <QFile>
 class NesDiskHeader
 {
 public:

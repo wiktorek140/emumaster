@@ -178,4 +178,3 @@ expand_normal:
   bne 2b
 
   ldmia sp!, { r4, r5, r6, r7, pc }
-

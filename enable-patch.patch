@@ -1,0 +1,158 @@
+diff --git a/src/emumaster.pro b/src/emumaster.pro
+index 498c60c..87b767b 100644
+--- a/src/emumaster.pro
++++ b/src/emumaster.pro
+@@ -2,7 +2,7 @@ TEMPLATE = subdirs
+ 
+ SUBDIRS += \
+     base \
+-	amiga snes gba \
++	nes pico amiga snes gba \
+ 	diskgallery 
+ 
+ # nes gba snes psx amiga pico \
+diff --git a/src/nes/cheats.cpp b/src/nes/cheats.cpp
+index 8dab161..9287a08 100644
+--- a/src/nes/cheats.cpp
++++ b/src/nes/cheats.cpp
+@@ -131,11 +131,9 @@ QValidator::State GameGenieValidator::validate(QString &input, int &pos) const
+ 
+ NesCheats::NesCheats()
+ {
+-	QHash<int, QByteArray> roles;
+-	roles.insert(CodeRole, "code");
+-	roles.insert(DescriptionRole, "codeDescription");
+-	roles.insert(EnableRole, "codeEnabled");
+-	setRoleNames(roles);
++	_roles.insert(CodeRole, "code");
++	_roles.insert(DescriptionRole, "codeDescription");
++	_roles.insert(EnableRole, "codeEnabled");
+ }
+ 
+ void NesCheats::sl()
+@@ -147,8 +145,9 @@ void NesCheats::sl()
+ 	emsl.end();
+ 
+ 	if (!emsl.save) {
++        beginResetModel();
+ 		setCurrent(enabledList());
+-		reset();
++		endResetModel();
+ 	}
+ }
+ 
+diff --git a/src/nes/cheats.h b/src/nes/cheats.h
+index ed84835..42dff58 100644
+--- a/src/nes/cheats.h
++++ b/src/nes/cheats.h
+@@ -75,12 +75,15 @@ public:
+ 	Q_INVOKABLE void setEnabled(int i, bool on);
+ 	Q_INVOKABLE void addNew(const QString &code, const QString &description);
+ 	Q_INVOKABLE void removeAt(int i);
++
++    virtual QHash<int, QByteArray> roleNames() const { return _roles; }
+ private:
+ 	void setCurrent(const QList<GameGenieCode> &codes);
+ 
+ 	QStringList m_codes;
+ 	QStringList m_descriptions;
+ 	QList<bool> m_enable;
++    QHash<int, QByteArray> _roles;
+ };
+ 
+ extern NesCheats nesCheats;
+diff --git a/src/nes/disk.cpp b/src/nes/disk.cpp
+index 5beec17..d1229e3 100644
+--- a/src/nes/disk.cpp
++++ b/src/nes/disk.cpp
+@@ -17,7 +17,7 @@
+ #include "disk.h"
+ #include "mapper.h"
+ #include <base/crc32.h>
+-#include <QAbstractFileEngine>
++#include <QFile>
+ 
+ class NesDiskHeader
+ {
+diff --git a/src/nes/mapper/mapper018.h b/src/nes/mapper/mapper018.h
+index c4ac3f6..ba79c58 100644
+--- a/src/nes/mapper/mapper018.h
++++ b/src/nes/mapper/mapper018.h
+@@ -19,6 +19,14 @@
+ 
+ #include "../mapper.h"
+ 
++#ifndef TRUE
++#define TRUE 1
++#endif
++
++#ifndef FALSE
++#define FALSE 0
++#endif
++
+ class Mapper018 : public NesMapper
+ {
+ public:
+diff --git a/src/nes/nes.cpp b/src/nes/nes.cpp
+index 7993b32..09f1193 100644
+--- a/src/nes/nes.cpp
++++ b/src/nes/nes.cpp
+@@ -31,8 +31,9 @@
+ #include <base/emuview.h>
+ #include <base/configuration.h>
+ #include <QSettings>
+-#include <QApplication>
+-#include <qdeclarative.h>
++#include <QGuiApplication>
++#include <QQuickView>
++#include <QtQml>
+ 
+ NesEmu nesEmu;
+ SystemType nesSystemType;
+@@ -289,11 +290,14 @@ int main(int argc, char *argv[])
+ {
+ 	if (argc < 2)
+ 		return -1;
+-	QApplication app(argc, argv);
+ 	qmlRegisterType<NesPpu>();
+-	EmuView view(&nesEmu, argv[1]);
++    QGuiApplication *app = new QGuiApplication(argc, argv);
++    QQuickView *view = new QQuickView();
++
++	EmuView emuView(&nesEmu, argv[1], view);
+ #if defined(ENABLE_DEBUGGING)
+-	view.disableSafetyTimer();
++	emuView.disableSafetyTimer();
+ #endif
+-	return app.exec();
++
++	return app->exec();
+ }
+diff --git a/src/pico/pico.cpp b/src/pico/pico.cpp
+index 8f9e52b..5fa1da5 100644
+--- a/src/pico/pico.cpp
++++ b/src/pico/pico.cpp
+@@ -13,7 +13,8 @@
+ #include <base/pathmanager.h>
+ #include <base/emuview.h>
+ #include <QImage>
+-#include <QApplication>
++#include <QGuiApplication>
++#include <QQuickView>
+ #include <QFile>
+ #include <QDir>
+ 
+@@ -649,7 +650,9 @@ int main(int argc, char *argv[])
+ {
+ 	if (argc < 2)
+ 		return -1;
+-	QApplication app(argc, argv);
+-	EmuView view(&picoEmu, argv[1]);
+-	return app.exec();
++    QGuiApplication *app = new QGuiApplication(argc, argv);
++    QQuickView *view = new QQuickView();
++
++	EmuView emuView(&picoEmu, argv[1], view);
++	return app->exec();
+ }
+
