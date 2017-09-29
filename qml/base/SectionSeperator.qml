@@ -28,7 +28,7 @@ Item {
 		height: parent.height
 		anchors.right: parent.right
 		font.pointSize: 18
-		color: theme.inverted ? "#4D4D4D" : "#3C3C3C";
+        color: "#3C3C3C";
 		horizontalAlignment: Text.AlignHCenter
 		verticalAlignment: Text.AlignVCenter
 	}
@@ -38,6 +38,6 @@ Item {
 		anchors.right: parent.right
 		anchors.rightMargin: sectionDelegate.rightPad
 		anchors.verticalCenter: headerLabel.verticalCenter
-		source: "image://theme/meegotouch-groupheader" + (theme.inverted ? "-inverted" : "") + "-background"
+        source: "image://theme/meegotouch-groupheader-background"
 	}
 }

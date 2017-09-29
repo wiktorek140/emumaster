@@ -224,4 +224,4 @@ extern u32 flash_device_id;
 }
 #endif
 
-#endif // GBAMEM_H
+#endif

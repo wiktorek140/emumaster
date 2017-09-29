@@ -1655,7 +1655,4 @@ _CMP_REG_REGSHIFT_COND(rd, rn, rm, shift_type, rs, ARMCOND_AL)
   _CMN_REG_IMMSHIFT_COND(rn, rm, shift_type, imm_shift, ARMCOND_AL)
 #endif
 
-
-
 /* end generated */
-

@@ -109,9 +109,33 @@ unix {
         ../../qml/base/constants.js \
         ../../qml/base/utils.js
 
-    buttons.path = /opt/emumaster/data
+    buttons.path = /opt/emumaster/data/buttons
     buttons.files = \
-        ../../data/buttons.png
+        ../../data/buttons.png \
+        ../../data/buttons/a.png \
+        ../../data/buttons/b.png \
+        ../../data/buttons/c.png \
+        ../../data/buttons/circle.png \
+        ../../data/buttons/close.png \
+        ../../data/buttons/down.png \
+        ../../data/buttons/l.png \
+        ../../data/buttons/l1.png \
+        ../../data/buttons/l2.png \
+        ../../data/buttons/left.png \
+        ../../data/buttons/m.png \
+        ../../data/buttons/r.png \
+        ../../data/buttons/r1.png \
+        ../../data/buttons/r2.png \
+        ../../data/buttons/right.png \
+        ../../data/buttons/select.png \
+        ../../data/buttons/settings.png \
+        ../../data/buttons/square.png \
+        ../../data/buttons/start.png \
+        ../../data/buttons/triangle.png \
+        ../../data/buttons/up.png \
+        ../../data/buttons/x.png \
+        ../../data/buttons/y.png \
+        ../../data/buttons/z.png
 
     shaders.path = /opt/emumaster/data/shader
     shaders.files = \
@@ -137,3 +161,29 @@ unix {
 contains(MEEGO_EDITION, harmattan) {
 #	CONFIG += qmsystem2
 }
+
+DISTFILES += \
+    ../../data/buttons/a.png \
+    ../../data/buttons/b.png \
+    ../../data/buttons/c.png \
+    ../../data/buttons/circle.png \
+    ../../data/buttons/close.png \
+    ../../data/buttons/down.png \
+    ../../data/buttons/l.png \
+    ../../data/buttons/l1.png \
+    ../../data/buttons/l2.png \
+    ../../data/buttons/left.png \
+    ../../data/buttons/m.png \
+    ../../data/buttons/r.png \
+    ../../data/buttons/r1.png \
+    ../../data/buttons/r2.png \
+    ../../data/buttons/right.png \
+    ../../data/buttons/select.png \
+    ../../data/buttons/settings.png \
+    ../../data/buttons/square.png \
+    ../../data/buttons/start.png \
+    ../../data/buttons/triangle.png \
+    ../../data/buttons/up.png \
+    ../../data/buttons/x.png \
+    ../../data/buttons/y.png \
+    ../../data/buttons/z.png

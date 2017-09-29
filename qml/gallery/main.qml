@@ -38,38 +38,24 @@ ApplicationWindow {
 	}
 
 	function showHowToAddToFavDialog() {
-		errorDialog.message = qsTr("The favourite category is empty. To add a disk to favourite list " +
-								   "just select the disk from one of emulated systems (press and hold), " +
-								   "a menu will appear, choose \"Add To Favourites\"")
-		errorDialog.open()
-	}
+        var dialog = pageStack.push(Qt.resolvedUrl("InfoDialog.qml"),
+                                   {"message":  qsTr("The favourite category is empty. To add a disk to favourite list " +
+                                   "just select the disk from one of emulated systems (press and hold), " +
+                                   "a menu will appear, choose \"Add To Favourites\"") } );
+
+    }
 
 	function showHowToAddDialog() {
-		errorDialog.message = qsTr("The directory is empty. To install a disk you need to attach " +
-								   "the phone to the PC and copy your files to \"emumaster/%1\" " +
-								   "directory. Remember to detach the phone from the PC.")
-									 .arg(diskListModel.collection)
-		errorDialog.open()
+        var dialog = pageStack.push(Qt.resolvedUrl("InfoDialog.qml"),
+                                   {"message": qsTr("The directory is empty. To install a disk you need to attach " +
+                                   "the phone to the PC and copy your files to \"emumaster/%1\" " +
+                                   "directory. Remember to detach the phone from the PC.")
+                                   .arg(diskListModel.collection) });
 	}
 
-/*
-	QueryDialog {
-		property bool quitOnReject: false
-
-		id: errorDialog
-		titleText: qsTr("Oops")
-		message: qsTr("Something went wrong!")
-		rejectButtonText: qsTr("Close")
-
-		onRejected: {
-			if (quitOnReject)
-				Qt.quit()
-		}
-	}
-*/
 
 	Component.onCompleted: {
-		theme.inverted = true
+        theme.inverted = true
 	}
 
 	property Item keysForwardedTo: mainPage
