@@ -70,6 +70,6 @@ typedef u32 fixed16_16;
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-//#include <stdarg.h>
+#include <stdarg.h>
 
 #endif // GBACOMMON_H

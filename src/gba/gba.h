@@ -18,7 +18,6 @@
 #define GBAEMU_H
 
 #if defined(__cplusplus)
-#include <base/emu.h>
 #include "common.h"
 #include <QThread>
 
@@ -39,7 +38,7 @@ class GbaEmu : public Emu
 	Q_PROPERTY(QString gamePackMaker READ gamePackMaker CONSTANT)
 	Q_PROPERTY(GbaCheats *cheats READ cheats CONSTANT)
 public:
-	explicit GbaEmu(QObject *parent = 0);
+	GbaEmu();
 
 	bool init(const QString &diskPath, QString *error);
 	void shutdown();

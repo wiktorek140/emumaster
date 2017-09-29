@@ -195,18 +195,11 @@ ApplicationWindow
                         icon.source: "../../data/buttons/select.png"
                         scale: frameItem.scalingFactor
                         anchors {left: parent.left; bottom: parent.bottom}
-
-                        onPressed: emuView.addButtonPress(0, EmuPad.Button_Select)
-                        onReleased: emuView.removeButtonPress(0, EmuPad.Button_Select)
-
                     }
                     IconButton {
                         icon.source: "../../data/buttons/start.png"
                         scale: frameItem.scalingFactor
                         anchors {right: parent.right; bottom: parent.bottom}
-
-                        onPressed: emuView.addButtonPress(0, EmuPad.Button_Start)
-                        onReleased: emuView.removeButtonPress(0, EmuPad.Button_Start)
                     }
                 }
             }
@@ -229,7 +222,7 @@ ApplicationWindow
         target: emuView
         onPauseStage2Finished: {
             if (startupAudioHack) {
-                emuView.sleepMs(200)
+                emuView.sleepMs(100)
                 emuView.showEmulationView()
                 emuView.resume()
                 startupAudioHack = false

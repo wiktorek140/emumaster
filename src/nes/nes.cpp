@@ -31,9 +31,8 @@
 #include <base/emuview.h>
 #include <base/configuration.h>
 #include <QSettings>
-#include <QGuiApplication>
-#include <QQuickView>
-#include <QtQml>
+#include <QApplication>
+#include <qdeclarative.h>
 
 NesEmu nesEmu;
 SystemType nesSystemType;
@@ -290,15 +289,11 @@ int main(int argc, char *argv[])
 {
 	if (argc < 2)
 		return -1;
+	QApplication app(argc, argv);
 	qmlRegisterType<NesPpu>();
-    QGuiApplication *app = new QGuiApplication(argc, argv);
-    QQuickView *view = new QQuickView();
-
-	EmuView emuView(&nesEmu, argv[1], view);
-
+	EmuView view(&nesEmu, argv[1]);
 #if defined(ENABLE_DEBUGGING)
-	emuView.disableSafetyTimer();
+	view.disableSafetyTimer();
 #endif
-
-	return app->exec();
+	return app.exec();
 }

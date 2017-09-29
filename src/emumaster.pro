@@ -18,13 +18,10 @@ TEMPLATE = subdirs
 
 SUBDIRS += \
     base \
-    amiga \
-    snes \
-    nes \
-    pico \
-    gba \
-    diskgallery
+	snes \
+	diskgallery 
 
+#	gba snes pico \
 # nes gba snes psx amiga pico \
 
 OTHER_FILES += \

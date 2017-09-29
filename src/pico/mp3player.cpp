@@ -80,10 +80,8 @@ int Mp3Player::pos()
 	if (!m_pipeline || !m_started)
 		return 0;
 
-    gint64 pos = 1;
-    //GstFormat fmt;
-    //fmt = GST_FORMAT_TIME;
-
-    //gst_element_query_position(m_pipeline, fmt, &pos);
+	gint64 pos;
+	GstFormat fmt = GST_FORMAT_TIME;
+	gst_element_query_position(m_pipeline, &fmt, &pos);
 	return pos / 1000000;
 }

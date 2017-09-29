@@ -16,9 +16,9 @@ unix {
 }
 
 HEADERS += \
-    #zfile.h \
-    #keybuf.h \
-    #joystick.h \
+    zfile.h \
+    keybuf.h \
+    joystick.h \
     events.h \
     drawing.h \
     disk.h \
@@ -41,10 +41,10 @@ SOURCES += \
 	custom.cpp \
 	disk.cpp \
 	drawing.cpp \
-        cyclone.S \
+    cyclone.S \
 	spu.cpp \
 	mem.cpp \
 	mem_handlers.S \
 	cpu.cpp \
-        keyb.cpp \
-        amiga.cpp
+    keyb.cpp \
+    amiga.cpp

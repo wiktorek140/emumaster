@@ -131,9 +131,11 @@ QValidator::State GameGenieValidator::validate(QString &input, int &pos) const
 
 NesCheats::NesCheats()
 {
-	_roles.insert(CodeRole, "code");
-	_roles.insert(DescriptionRole, "codeDescription");
-	_roles.insert(EnableRole, "codeEnabled");
+	QHash<int, QByteArray> roles;
+	roles.insert(CodeRole, "code");
+	roles.insert(DescriptionRole, "codeDescription");
+	roles.insert(EnableRole, "codeEnabled");
+	setRoleNames(roles);
 }
 
 void NesCheats::sl()
@@ -145,9 +147,8 @@ void NesCheats::sl()
 	emsl.end();
 
 	if (!emsl.save) {
-        beginResetModel();
 		setCurrent(enabledList());
-		endResetModel();
+		reset();
 	}
 }
 

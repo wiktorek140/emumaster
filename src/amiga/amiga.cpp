@@ -28,8 +28,7 @@
 #include <base/pathmanager.h>
 #include <QImage>
 #include <QSemaphore>
-#include <QGuiApplication>
-#include <QQuickView>
+#include <QApplication>
 
 static volatile bool amigaGoingShutdown = false;
 static QImage amigaFrame;
@@ -179,9 +178,7 @@ void AmigaEmu::sl() {
 int main(int argc, char *argv[]) {
 	if (argc < 2)
 		return -1;
-    QGuiApplication *app = new QGuiApplication(argc, argv);
-    QQuickView *view = new QQuickView();
-
-	EmuView emuView(&amigaEmu, argv[1], view);
-	return app->exec();
+	QApplication app(argc, argv);
+	EmuView view(&amigaEmu, argv[1]);
+	return app.exec();
 }
